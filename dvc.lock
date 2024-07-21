@@ -1,0 +1,51 @@
+schema: '2.0'
+stages:
+  get_data:
+    cmd: python src\flowerClassification\stage1_get_data.py
+    deps:
+    - path: src\flowerClassification\stage1_get_data.py
+      hash: md5
+      md5: 9fac4e565f6a14c3d61c920a00885f34
+      size: 550
+    outs:
+    - path: assets\feature_store\raw_data.json
+      hash: md5
+      md5: 2fff16b719fc80fba618eb07260761e8
+      size: 30395
+  preprocess:
+    cmd: python src\flowerClassification\stage2_preprocess.py
+    deps:
+    - path: assets\feature_store\raw_data.json
+      hash: md5
+      md5: 2fff16b719fc80fba618eb07260761e8
+      size: 30395
+    - path: src\flowerClassification\stage2_preprocess.py
+      hash: md5
+      md5: 64ba380eeb23019063ea2c52a60b26ac
+      size: 1001
+    params:
+      params.yaml:
+        prep:
+          pca_comps_count: 3
+    outs:
+    - path: assets\feature_store\pca_data.json
+      hash: md5
+      md5: d582f4595c38331857ab1b1e3302136a
+      size: 24684
+  train:
+    cmd: python src\flowerClassification\stage3_train.py
+    deps:
+    - path: assets\feature_store\pca_data.json
+      hash: md5
+      md5: d582f4595c38331857ab1b1e3302136a
+      size: 24684
+    - path: src\flowerClassification\stage3_train.py
+      hash: md5
+      md5: 0a46e76b3a48884e265aa38ee6bc0006
+      size: 2516
+    params:
+      params.yaml:
+        desition_tree:
+          max_depth: 3
+        logistic_regression:
+          C: 0.5

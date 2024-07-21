@@ -31,9 +31,12 @@ X_scaled = scaler.fit_transform(df.drop(columns=["target"]))
 
 
 
+from flowerClassification.config import config
+
+
 
 # Apply PCA
-pca = PCA(n_components=2)
+pca = PCA(n_components=config.prep.pca_comps_count)
 X_pca = pca.fit_transform(X_scaled)
 
 

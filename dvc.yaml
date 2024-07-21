@@ -1,0 +1,29 @@
+stages:
+
+  get_data:
+    cmd: python src\flowerClassification\stage1_get_data.py
+    deps:
+      - src\flowerClassification\stage1_get_data.py
+    outs:
+      - assets\feature_store\raw_data.json
+
+
+  preprocess:
+    cmd: python src\flowerClassification\stage2_preprocess.py
+    params:
+      - prep
+    deps:
+      - src\flowerClassification\stage2_preprocess.py
+      - assets\feature_store\raw_data.json
+    outs:
+      - assets\feature_store\pca_data.json
+
+
+  train:
+    cmd: python src\flowerClassification\stage3_train.py
+    params:
+      - logistic_regression
+      - desition_tree
+    deps:
+      - src\flowerClassification\stage3_train.py
+      - assets\feature_store\pca_data.json

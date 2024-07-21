@@ -1,0 +1,11 @@
+prep:
+  pca_comps_count : 3
+  
+
+
+logistic_regression : 
+  C : 0.5
+
+
+desition_tree : 
+  max_depth : 3
