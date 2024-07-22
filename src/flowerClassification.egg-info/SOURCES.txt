@@ -1,9 +1,0 @@
-README.md
-setup.py
-src/flowerClassification/__init__.py
-src/flowerClassification/stage1_get_data.py
-src/flowerClassification.egg-info/PKG-INFO
-src/flowerClassification.egg-info/SOURCES.txt
-src/flowerClassification.egg-info/dependency_links.txt
-src/flowerClassification.egg-info/top_level.txt
-src/flowerClassification/components/__init__.py

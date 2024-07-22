@@ -141,12 +141,26 @@ scores
 current_branch,head_commit
 
 
+tags={"branch":current_branch , 'commit_id':head_commit}
+
+
+with open('artifacts/pipelines_scores.json', 'w') as json_file:
+    json.dump(scores, json_file, indent=4)
+    
+with open('artifacts/pipelines_params.json', 'w') as json_file:
+    json.dump(params, json_file, indent=4)
+    
+with open('artifacts/pipelines_info.json', 'w') as json_file:
+    json.dump(tags, json_file, indent=4)
 
 
 
-with mlflow.start_run(run_name="koko",tags={"branch":current_branch , 'commit_id':head_commit}) as run:
+
+
+with mlflow.start_run(run_name="koko",tags=tags) as run:
     mlflow.log_params(params)
     mlflow.log_metrics(scores)
+    mlflow.log_artifacts(local_dir="artifacts")
 
 
 
